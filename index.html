@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <div class="item-column">
+        <div class="item-container">
+          <h1>List 1</h1>
+        <div class="item-send">
+          <form>
+            <input type="text" placeholder="">
+            <button type="submit">Submit</button>
+          </form>
+         
+      </div>
+       <div class="item">
+        <span class="message">Add items...</span>
+       <ul>
+       </ul>
+       </div>
+      </div>
+    </div>
+
+    <div class="add">
+    </div>
+
+
+
+  </main>
+  <script>
+    const item = document.querySelector(".item-column")
+    const main = document.querySelector("main")
+ 
+    const template = `
+    <div class="item-container">
+          <h1>List 1</h1>
+        <div class="item-send">
+          <form>
+            <input type="text" placeholder="">
+            <button type="submit">Submit</button>
+          </form>
+         
+      </div>
+       <div class="item">
+        <span class="message">Add items...</span>
+       <ul>
+       </ul>
+       </div>
+      </div>
+    </div>
+    `
+ 
+    document.querySelectorAll(".item-column").forEach(element =>{
+   element.querySelector("form").addEventListener('submit', function(evt){
+      evt.preventDefault();
+     let input= element.querySelector("input").value
+     let list = element.querySelector('ul')
+     let li = document.createElement("li")
+     let message = element.querySelector('.message')
+     let textNode = document.createTextNode(input)
+     console.log(input)
+     if(input==="")
+     {
+      element.querySelector("input").setAttribute("placeholder","You must type something")
+     }
+     else{
+      element.querySelector("input").setAttribute("placeholder","")
+      li.appendChild(textNode)
+      list.appendChild(li)
+      message.classList.add("hidden")
+     }
+    
+   element.querySelector("input").value=""
+    
+    }) 
+    
+  })
+  
+
+  document.querySelector(".add").addEventListener("click",()=>{
+    let create = document.createElement("div")
+    main.appendChild(create)
+    create.innerHTML=template;
+    create.setAttribute("class","item-column")
+    let i = 1 
+    document.querySelectorAll(".item-column").forEach(element=>{
+        element.querySelector("h1").innerText="List " + i
+        i++
+     
+    element.querySelector("form").addEventListener('submit', function(evt){
+    evt.preventDefault();
+     let input= element.querySelector("input").value
+     let list = element.querySelector('ul')
+     let li = document.createElement("li")
+     let message = element.querySelector('.message')
+     let textNode = document.createTextNode(input)
+     if(input==="")
+     {
+     
+     }
+     else{
+      element.querySelector("input").setAttribute("placeholder","")
+      li.appendChild(textNode)
+      list.appendChild(li)
+      message.classList.add("hidden")
+     }
+    
+     element.querySelector("input").value=""
+    
+    }) 
+    
+  })
+
+  })
+
+
+</script>
+</body>
+</html>
